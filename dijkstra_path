@@ -1,0 +1,32 @@
+### 가중치 무방향 그래프 최단 거리 구하기(Dijkstra algorithm)
+
+import networkx as nx
+  
+def find_weighted_shortest_path(graph_edges, start_node, end_node):
+    G = nx.Graph()  # 가중치가 있는 무방향 그래프 생성
+    
+    # 그래프에 엣지 추가 (가중치 포함)
+    G.add_weighted_edges_from(graph_edges)
+    
+    try:
+        # 다익스트라 알고리즘을 사용하여 최단 경로 계산
+        shortest_path = nx.dijkstra_path(G, source=start_node, target=end_node)
+        path_length = nx.dijkstra_path_length(G, source=start_node, target=end_node)
+        return shortest_path, path_length
+    except nx.NetworkXNoPath:
+        return None, None
+          
+graph_edges = []
+
+v, e = map(int,input().split())
+k = int(input())
+for i in range(e):
+  graph_edges.append(tuple(map(int,input().split())))
+
+# 최단 경로 찾기
+shortest_path, path_length = find_weighted_shortest_path(graph_edges, start_node, end_node)
+if shortest_path:
+    print("최단 경로:", shortest_path)
+    print("경로 길이:", path_length)
+else:
+    print("경로가 존재하지 않습니다.")
