@@ -1,0 +1,17 @@
+n, k = map(int,input().split()) # 물품수, 가방 용량
+obj_lst = [] # 물건 무게, 가치 저장할 리스트
+for _ in range(n):
+  w, v = map(int,input().split()) # 무게, 가치 입력받기
+  obj_lst.append((w,v))
+
+def knapsack(n,k,items):
+  dp = [0] * (k+1)
+  
+  for i in range(n):
+    w, v = items[i]
+    for j in range(k,w-1,-1):
+      dp[j] = max(dp[j], dp[j-w] + v)
+    return dp[k]
+  
+print(knapsack(n,k,obj_lst))
+  
